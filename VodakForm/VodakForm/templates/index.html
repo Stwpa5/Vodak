@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>{{ title }}</h1>
+
+    <h2>Seznam registrovaných účastníků</h2> <!-- seznam registrovanych ucastniku -->
+    {% if ucastnici %}
+        <ul>
+            {% for ucastnik in ucastnici %}
+                <li>
+                    <strong>Přezdívka:</strong> {{ ucastnik['nick'] }}
+                    <br>
+                    <strong>Plavec:</strong> {% if ucastnik['je_plavec'] == '1' %} Ano {% else %} Ne {% endif %}
+                    {% if ucastnik['kanoe_kamarad'] %}
+                        <br>
+                        <strong>Kánoe kamarád:</strong> {{ ucastnik['kanoe_kamarad'] }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Zatím žádní registrovaní účastníci.</p>
+    {% endif %}
+
+    <a href="{{ url_for('registrace') }}">Registrovat se</a> <!-- link pro registraci -->
+</body>
+</html>
